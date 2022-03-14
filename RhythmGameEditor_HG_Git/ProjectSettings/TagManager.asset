@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackGround
+    uniqueID: 2248044021
+    locked: 0
+  - name: Grid
+    uniqueID: 3712021853
+    locked: 0
+  - name: NoteLine
+    uniqueID: 316971257
+    locked: 0
+  - name: Note
+    uniqueID: 2008294895
+    locked: 0
+  - name: Character
+    uniqueID: 1104793261
+    locked: 0
