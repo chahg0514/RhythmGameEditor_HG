@@ -18,14 +18,17 @@ public class Music : MonoBehaviour
     public float first;
     public float before;
     public double when25;
-    public float offset = 2.4655f;
+    
+    public float offset = 1.3f;
     
     void Start()
     {
+        offset /= Speed / 4;
         DivisionValue *= 1 / 140f; //카메라크기 키워서..
         audioSource = gameObject.GetComponent<AudioSource>();
         MusicTime = audioSource.clip.length;
         //when25 = -offset - 5.0f;
+        
         before = 0;
     }
 
