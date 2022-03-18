@@ -22,9 +22,9 @@ public class Grid : MonoBehaviour
 
     void Update()
     {
-        
-        if(gridEditor.isPlay)
-            transform.Translate(Vector3.down * Time.smoothDeltaTime * music.Speed);
+
+        if (gridEditor.isPlay)
+            transform.Translate(Vector3.down * Time.smoothDeltaTime * music.Speed * 140);
     }
 
     

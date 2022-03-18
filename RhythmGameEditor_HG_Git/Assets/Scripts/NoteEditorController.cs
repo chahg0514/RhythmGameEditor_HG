@@ -9,7 +9,6 @@ public class NoteEditorController : MonoBehaviour //이 스크립트는 에디�
     public Camera mainCam;
     public Music music;
     float rayDistance = 15f;
-    public GameObject cursurObj;
     
     public RaycastHit2D mRay;
 

@@ -10,7 +10,7 @@ public class Music : MonoBehaviour
     public GridEditor gridEditor;
     public bool isPlay;
     public int gridNumber = 0;
-    public float bpm = 92;
+    public float bpm { get; set; }
     public float spb;
     public float Speed = 1f;
     public float DivisionValue = 16f;
@@ -58,11 +58,6 @@ public class Music : MonoBehaviour
         StartCoroutine(gridEditor.Syncing());
         MusicTime -= offset;
         first = MusicTime;
-        
-    }
-
-    public void PositionByMusic()
-    {
         
     }
 }

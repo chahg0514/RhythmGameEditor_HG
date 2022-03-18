@@ -117,7 +117,9 @@ public class GridEditor : MonoBehaviour
         for (int i = 0; i < GridAmount; i++)
         {
             //Debug.Log(i * music.spb * 4 * music.Speed);
-            GameObject obj = Instantiate(gridObject, new Vector3(0f,- music.offset + i * music.spb * 32f * music.Speed * (1f/music.DivisionValue)), Quaternion.identity);     //4는 노트줄 4개
+            GameObject obj = Instantiate(gridObject,
+                new Vector3(0f, -music.offset * 140 + i * music.spb * 32f * music.Speed * (1f / music.DivisionValue)),
+                Quaternion.identity);  //4는 노트줄 4개
             Process32rd(obj);
             Grid grid = obj.GetComponent<Grid>();
             BoxCollider2D coll = obj.GetComponent<BoxCollider2D>();
@@ -140,7 +142,9 @@ public class GridEditor : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             //Debug.Log(i * music.spb * 4 * music.Speed);
-            GameObject obj = Instantiate(gridObject, new Vector3(0f,- music.offset + i * music.spb * 32f * music.Speed * (1f/music.DivisionValue)), Quaternion.identity);     //4는 노트줄 4개
+            GameObject obj = Instantiate(gridObject,
+                new Vector3(0f, -music.offset * 140 + i * music.spb * 32f * music.Speed * (1f / music.DivisionValue)),
+                Quaternion.identity);   //4는 노트줄 4개
             Process32rd(obj);
             Grid grid = obj.GetComponent<Grid>();
             BoxCollider2D coll = obj.GetComponent<BoxCollider2D>();
@@ -149,6 +153,7 @@ public class GridEditor : MonoBehaviour
             grid.barNumber = i;
             SecondStartNumber = i;
             grids.Add(obj);
+            musicInfo.DisPoseNote(musicInfo.FindGridNote(i), i);
         }
 
         isLoad = true;
@@ -158,7 +163,7 @@ public class GridEditor : MonoBehaviour
     public void GridGenerateInGame2(int i)
     {
         //Debug.Log(i * music.spb * 4 * music.Speed);
-        GameObject obj = Instantiate(gridObject, new Vector3(0f, 18.38522f * 140 + 1.3f), Quaternion.identity);  //4는 노트줄 4개
+        GameObject obj = Instantiate(gridObject, new Vector3(0f, 1278), Quaternion.identity);  //4는 노트줄 4개
         Process32rd(obj);
         Grid grid = obj.GetComponent<Grid>();
         BoxCollider2D coll = obj.GetComponent<BoxCollider2D>();
@@ -167,6 +172,7 @@ public class GridEditor : MonoBehaviour
         grid.barNumber = i;
         SecondStartNumber = i;
         grids.Add(obj);
+        musicInfo.DisPoseNote(musicInfo.FindGridNote(i), i);
     }
 
     IEnumerator Generate()
@@ -186,13 +192,6 @@ public class GridEditor : MonoBehaviour
         }
     }
 
-    IEnumerator SetPosition()
-    {
-        yield return new WaitForSeconds(2.5f);
-    }
-    
-    
-    
     void Process32rd(GameObject grid)
     {
         for(int i = 0; i < 32; i++)
