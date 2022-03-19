@@ -89,7 +89,7 @@ public class GridEditor : MonoBehaviour
         while (TrueNumber == 1)
         {
             //Debug.Log("지금 생성중");
-            if (music.when25 >= 2.60869)
+            if (music.createGridTime >= 2.60869)
             {
                 GridGenerateInGame2(i);
                 i++;

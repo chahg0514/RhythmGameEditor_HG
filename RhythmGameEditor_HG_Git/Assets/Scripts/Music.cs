@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Music : MonoBehaviour
 {
@@ -15,9 +16,7 @@ public class Music : MonoBehaviour
     public float Speed = 1f;
     public float DivisionValue = 16f;
     public float MusicTime;
-    public float first;
-    public float before;
-    public double when25;
+    public double createGridTime;
     
     public float offset = 1.3f;
     
@@ -29,7 +28,6 @@ public class Music : MonoBehaviour
         MusicTime = audioSource.clip.length;
         //when25 = -offset - 5.0f;
         
-        before = 0;
     }
 
     void Update()
@@ -38,7 +36,7 @@ public class Music : MonoBehaviour
         //Debug.Log(when25);
         if (audioSource.isPlaying)
         {
-            when25 = - gridNumber * 2.60869 + audioSource.time;
+            createGridTime = - gridNumber * 2.60869 + audioSource.time;
         }
         else
         {
@@ -60,7 +58,5 @@ public class Music : MonoBehaviour
         audioSource.Play();
         StartCoroutine(gridEditor.Syncing());
         MusicTime -= offset;
-        first = MusicTime;
-        
     }
 }
