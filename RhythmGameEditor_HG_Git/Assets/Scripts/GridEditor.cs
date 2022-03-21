@@ -22,7 +22,6 @@ public class GridEditor : MonoBehaviour
     public int GridAmount;
     public int TrueNumber;
     public bool isLoad;
-    public bool isPlay;
     public double curruntTime ;
     void Start()
     {
@@ -32,6 +31,7 @@ public class GridEditor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         Scroll();
     }
     void Scroll()
@@ -50,13 +50,6 @@ public class GridEditor : MonoBehaviour
         //InterpolPos(dir);
     }
     
-    public void StartMusic()
-    {
-        isPlay = true;
-        Debug.Log("dd");
-        //if(isLoad)
-            //StartCoroutine(Generate());
-    }
 
     public void LoadGame()
     {

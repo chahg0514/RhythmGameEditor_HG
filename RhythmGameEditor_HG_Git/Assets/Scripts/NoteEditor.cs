@@ -14,34 +14,29 @@ public class NoteEditor : MonoBehaviour
     public GameObject PinkNote;
     public GameObject BlueNote;
     GameObject seletedObject; // 배치 단계에서 선택된 오브젝트
+    private GameObject obj;
     
     int currentSelectedLine;
-    private int curruentSelectedGrid;
+    public int curruentSelectedGrid;
     
     public Vector3 snapPos;
     public float snapPosX = 0f;
     public int currentColor;
     private float halfSnapAmount;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if(noteEditorController.isDetected)
+        //KeyDownDisPose();
+        if (noteEditorController.isDetected)
+        {
             DisposePreObject();
+        }
+           
         else
         {
             note.SetActive(false);
         }
-
     }
-    
-
     public void Pink()
     {
         //note.GetComponent<SpriteRenderer>().color = Color.red;
@@ -55,6 +50,31 @@ public class NoteEditor : MonoBehaviour
         note = BlueNote;
         currentColor = 1;
     }
+
+    void KeyDownDisPose()
+    {
+        //music.gridNumber
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            //obj = Instantiate(PinkNote, snapPos, Quaternion.identity, noteContainer.transform);
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+
+            }
+        }
+    }
+
+
     void DisposePreObject()
     {
         if (noteEditorController.mRay.transform.gameObject.layer == 6)
@@ -70,20 +90,22 @@ public class NoteEditor : MonoBehaviour
 
             ProcessSnapPos(hitToGrid, gridObject); //이게 마우스 이동에 따라서 노트 실시간 움직임
 
+            note.SetActive(true);
+            //Debug.Log(snapPos);
+            note.transform.position = snapPos;//노트 위치 실시간으로 바꿔주는 코드(OnCursurEffect 안쓰고 이거씀)
+
+            if (noteEditorController.mouseClickNum == 0)
+                DisposeObject(gridObject,grid);
+            else if (noteEditorController.mouseClickNum == 1)
+                UnDisposeObject(gridObject);
+            
             if (music.audioSource.isPlaying)//음악 재생중이 아닐때만 커서에 있는 오브젝트를 활성화함
             {
-                note.SetActive(false);
+                //note.SetActive(false);
             }
             else//음악 재생중 아닐 때
             {
-                note.SetActive(true);
-                //Debug.Log(snapPos);
-                note.transform.position = snapPos;//노트 위치 실시간으로 바꿔주는 코드(OnCursurEffect 안쓰고 이거씀)
-
-                if (noteEditorController.mouseClickNum == 0)
-                    DisposeObject(gridObject,grid);
-                /*else if (noteEditorController.mouseClickNum == 1)
-                    UnDisposeObject(gridObject);*/
+                
             }
         }
         else
@@ -135,83 +157,78 @@ public class NoteEditor : MonoBehaviour
     }
     void DisposeObject(GameObject gridObject,Grid grid) //노트 배치
     {
-        GameObject noteContainer = gridObject.transform.GetChild(32).gameObject;
+        GameObject noteContainer = gridObject.transform.GetChild(32).gameObject; //이건 굳이 따로 안만들고 함수에 바로 집어넣어도 되지만 가독성위해 남겨두겠음
 
-        GameObject obj = Instantiate(note, snapPos, Quaternion.identity, noteContainer.transform);
-        
         if (!CheckObject(gridObject))//세이브 안눌려도 저장되도록
         {
+            if (currentColor == 0) 
+            {
+                obj = Instantiate(PinkNote, snapPos, Quaternion.identity, noteContainer.transform);
+            }
+            else
+            {
+                obj = Instantiate(BlueNote, snapPos, Quaternion.identity, noteContainer.transform);
+            }
+            
             Debug.Log("dfddfdf");
             musicInfo.InputData(obj, currentColor,grid.barNumber);
         }
         
+        
 
     }
-    // 오브젝트 언배치
     
-    
-    /*void UnDisposeObject(GameObject gridObject)
+    void UnDisposeObject(GameObject gridObject) //설치할 때는 버튼을 눌러서 선택한 색대로 설치만하면 되지만, 없앨때는 그 자리에 있던 오브젝트의 색깔이 뭐였는지 비교해야하기 때문에 태그로 하기로함
     {
         if (CheckObject(gridObject))
         {
-            float pos = seletedObject.transform.localPosition.y + (currentBarNumber * music.BarPerSec * Speed);
-            DeleteObject(currentSelectedLine, pos);
+            Debug.Log(seletedObject == PinkNote);
+            //DeleteObject(currentSelectedLine, pos); 여기에 제이슨파일 삭제하는거만 넣으면됨
+            musicInfo.WhatInMyBag(new Note(0, CheckColor(seletedObject), curruentSelectedGrid, seletedObject.transform.position.x,
+                seletedObject.transform.localPosition.y));
 
             Destroy(seletedObject);
         }
-    }*/
-    
+    }
 
-    bool CheckObject(GameObject gridObject)
+    int CheckColor(GameObject selectedObject)
+    {
+        if (selectedObject.transform.CompareTag("PinkNote"))
+        {
+            Debug.Log("빨간색");
+            return 0;
+        }
+
+        return 1; //핑크노트가 아니면 당연히 블루니깐 엘스이프 생략가능
+
+    }
+    
+    bool CheckObject(GameObject gridObject)//0이면 설치, 1이면 삭제할때 함수호출한다는 뜻
     {
         GameObject noteContainer = gridObject.transform.GetChild(32).gameObject;
         bool isOverlap = false;
 
-        if (noteContainer.transform.childCount == 0)
+        if (noteContainer.transform.childCount == 1)
         {
-            //Debug.Log("0인데 추가");
-            return isOverlap;
+            
         }
-        else
+        for (int i = 0; i < noteContainer.transform.childCount; i++) //-1을 해주는 이유: 이미 인스턴시에이트를 하고 난 뒤이기 때문 => -1뺌
         {
-            for (int i = 0; i < noteContainer.transform.childCount; i++)
+            isOverlap = false;
+            Vector2 note = noteContainer.transform.GetChild(i).transform.position;
+            
+            //Debug.Log(snapPos.y - halfSnapAmount+ "-" + note.y +"-"+ snapPos.y + halfSnapAmount);
+            if (Mathf.Approximately(note.x, snapPos.x) && Mathf.Approximately(note.y,snapPos.y))
             {
-                isOverlap = false;
-                Vector2 note = noteContainer.transform.GetChild(i).transform.position;
-                //Debug.Log(snapPos.y - halfSnapAmount+ "-" + note.y +"-"+ snapPos.y + halfSnapAmount);
-                if (Mathf.Approximately(note.x, snapPos.x) && (note.y >= snapPos.y - halfSnapAmount && note.y <= snapPos.y + halfSnapAmount))
-                {
-                    
-                    Debug.Log("이미 노트가 있습니다.");
-                    seletedObject = noteContainer.transform.GetChild(i).transform.gameObject;
-                    isOverlap = true;
-                    break;
-                }
-            }
-            return isOverlap;
-        }
-    }  
-    
-    public void SaveNote()
-    {
-        if (gridEditor.grids != null)
-        {
-            musicInfo.musicData.note.Clear();
-            for (int i = 0; i < gridEditor.grids.Count; i++)
-            {
-                for (int j = 0; j < gridEditor.grids[i].transform.GetChild(32).transform.childCount; j++)
-                {
-                    
-                    musicInfo.InputData(gridEditor.grids[i].transform.GetChild(32).transform.GetChild(j).gameObject, currentColor,i);
-                    //Debug.Log(i);
-                    
-                }
+                Debug.Log(note.y + "+" + snapPos.y);
+                Debug.Log("이미 노트가 있습니다.");
+                seletedObject = noteContainer.transform.GetChild(i).transform.gameObject;
+                isOverlap = true;
+                break;
                 
             }
-            musicInfo.SaveNoteData();
         }
+        return isOverlap;
     }
-    
-    
-    
+
 }

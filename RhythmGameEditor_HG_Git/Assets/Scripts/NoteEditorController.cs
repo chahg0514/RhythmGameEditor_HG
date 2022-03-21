@@ -22,16 +22,18 @@ public class NoteEditorController : MonoBehaviour //이 스크립트는 에디�
 
     // Update is called once per frame
 
-    private void Update()
+    private void Update() //일단 임시로 옮겨놓음 음악 재생중에도 생성할수있게 해달라해서
     {
+        OnMouseClick();
+        OnMouseScroll();
+        
         if (music.audioSource.isPlaying)
         {
             
         }
         else
         {
-            OnMouseClick();
-            OnMouseScroll();
+            
         }
         
     }

@@ -17,6 +17,8 @@ public class Music : MonoBehaviour
     public float DivisionValue = 16f;
     public float MusicTime;
     public double createGridTime;
+
+    private bool isMusicStarted = false;
     
     public float offset = 1.3f;
     
@@ -37,10 +39,32 @@ public class Music : MonoBehaviour
         if (audioSource.isPlaying)
         {
             createGridTime = - gridNumber * 2.60869 + audioSource.time;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                isPlay = false;
+                audioSource.Pause();
+            }
         }
         else
         {
-            gridEditor.TrueNumber = 0;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (!isMusicStarted)
+                {
+                    isPlay = true;
+                    isMusicStarted = true;
+                    audioSource.Play();
+                    StartCoroutine(gridEditor.Syncing());
+                    MusicTime -= offset;
+                }
+                else
+                {
+                    isPlay = true;
+                    audioSource.Play();
+                }
+                
+
+            }
         }
         
     }
@@ -52,11 +76,9 @@ public class Music : MonoBehaviour
 
     }
 
-    public void StartMusic()
+    public void ResetGrid()
     {
-        Debug.Log(audioSource.clip.length);
-        audioSource.Play();
-        StartCoroutine(gridEditor.Syncing());
-        MusicTime -= offset;
+        audioSource.Stop();
+        gridEditor.LoadGame();
     }
 }

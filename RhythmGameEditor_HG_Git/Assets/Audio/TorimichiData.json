@@ -1,28 +1,42 @@
 {
     "Music": "Torimichi",
     "BPM": 92.0,
-    "noteCount": 3,
+    "noteCount": 6,
     "note": [
         {
             "Type": 0,
             "Color": 0,
             "GridNum": 0,
-            "XCoordinate": -450,
-            "YCoordinate": 0.0
+            "XCoordinate": -450.0,
+            "YCoordinate": 2191.304443359375
         },
         {
             "Type": 0,
             "Color": 0,
             "GridNum": 0,
-            "XCoordinate": -150,
-            "YCoordinate": 136.95652770996095
+            "XCoordinate": -450.0,
+            "YCoordinate": 1460.86962890625
         },
         {
             "Type": 0,
             "Color": 0,
             "GridNum": 0,
-            "XCoordinate": 450,
-            "YCoordinate": 182.60870361328126
+            "XCoordinate": 450.0,
+            "YCoordinate": 1369.5653076171875
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 0,
+            "XCoordinate": 450.0,
+            "YCoordinate": 2100.0
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 1,
+            "XCoordinate": 450.0,
+            "YCoordinate": 639.1304931640625
         }
     ]
 }
