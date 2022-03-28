@@ -13,10 +13,11 @@ public class Music : MonoBehaviour
     public int gridNumber = 0;
     public float bpm { get; set; }
     public float spb;
-    public float Speed = 1f;
+    public float gridIntervel = 1f;
     public float DivisionValue = 16f;
     public float MusicTime;
     public double createGridTime;
+    public float Speed;
 
     private bool isMusicStarted = false;
     
@@ -24,7 +25,7 @@ public class Music : MonoBehaviour
     
     void Start()
     {
-        offset /= Speed / 4;
+        offset /= gridIntervel / 4;
         DivisionValue *= 1 / 140f; //카메라크기 키워서..
         audioSource = gameObject.GetComponent<AudioSource>();
         MusicTime = audioSource.clip.length;
@@ -34,6 +35,7 @@ public class Music : MonoBehaviour
 
     void Update()
     {
+        audioSource.pitch = Speed;
         //Debug.Log(audioSource.time);
         //Debug.Log(when25);
         if (audioSource.isPlaying)

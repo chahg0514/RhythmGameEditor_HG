@@ -50,29 +50,27 @@ public class NoteEditor : MonoBehaviour
         note = BlueNote;
         currentColor = 1;
     }
-
+    
     void KeyDownDisPose()
-    {
-        //music.gridNumber
-        if (Input.GetKeyDown(KeyCode.Q))
         {
-            //obj = Instantiate(PinkNote, snapPos, Quaternion.identity, noteContainer.transform);
+            GameObject currentGrid = gridEditor.grids[music.gridNumber];
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                obj = Instantiate(PinkNote, new Vector3(-450, -350, -1), Quaternion.identity, currentGrid.transform.GetChild(32).transform);
+            }
             if (Input.GetKeyDown(KeyCode.W))
             {
-
+                    
             }
-
             if (Input.GetKeyDown(KeyCode.E))
             {
-
+                    
             }
-
             if (Input.GetKeyDown(KeyCode.R))
             {
-
+                    
             }
         }
-    }
 
 
     void DisposePreObject()
@@ -138,7 +136,7 @@ public class NoteEditor : MonoBehaviour
         }
         // 현재 스냅양에 따라 스냅될 위치를 계산한다. (y값)
 
-        float snapAmount = 1f * music.spb * music.Speed * (1f/music.DivisionValue);
+        float snapAmount = 1f * music.spb * music.gridIntervel * (1f/music.DivisionValue);
         halfSnapAmount = snapAmount / 2;
 
         float snapPosY = hitToGrid.y;

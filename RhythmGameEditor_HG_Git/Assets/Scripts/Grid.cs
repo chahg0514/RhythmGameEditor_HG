@@ -24,7 +24,7 @@ public class Grid : MonoBehaviour
     {
 
         if (music.isPlay)
-            transform.Translate(Vector3.down * Time.smoothDeltaTime * music.Speed * 140);
+            transform.Translate(Vector3.down * Time.smoothDeltaTime * music.gridIntervel * 140 * music.Speed);
     }
 
     

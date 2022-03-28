@@ -1,8 +1,15 @@
 {
     "Music": "Torimichi",
     "BPM": 92.0,
-    "noteCount": 6,
+    "noteCount": 21,
     "note": [
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 0,
+            "XCoordinate": -150.0,
+            "YCoordinate": 0.0
+        },
         {
             "Type": 0,
             "Color": 0,
@@ -37,6 +44,118 @@
             "GridNum": 1,
             "XCoordinate": 450.0,
             "YCoordinate": 639.1304931640625
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 4,
+            "XCoordinate": 150.0,
+            "YCoordinate": 639.1304931640625
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 4,
+            "XCoordinate": 150.0,
+            "YCoordinate": 1369.5653076171875
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 4,
+            "XCoordinate": 450.0,
+            "YCoordinate": 2556.52197265625
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 5,
+            "XCoordinate": 450.0,
+            "YCoordinate": 365.2174072265625
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 5,
+            "XCoordinate": 450.0,
+            "YCoordinate": 1095.6522216796875
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 5,
+            "XCoordinate": 450.0,
+            "YCoordinate": 1917.391357421875
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 5,
+            "XCoordinate": 450.0,
+            "YCoordinate": 2556.52197265625
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 6,
+            "XCoordinate": 450.0,
+            "YCoordinate": 365.2174072265625
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 6,
+            "XCoordinate": 450.0,
+            "YCoordinate": 1095.6522216796875
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 6,
+            "XCoordinate": 450.0,
+            "YCoordinate": 1734.78271484375
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 6,
+            "XCoordinate": 450.0,
+            "YCoordinate": 2556.52197265625
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 7,
+            "XCoordinate": 450.0,
+            "YCoordinate": 365.2174072265625
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 7,
+            "XCoordinate": 450.0,
+            "YCoordinate": 1095.6522216796875
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 7,
+            "XCoordinate": 450.0,
+            "YCoordinate": 1826.0870361328125
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 7,
+            "XCoordinate": 450.0,
+            "YCoordinate": 2556.52197265625
+        },
+        {
+            "Type": 0,
+            "Color": 0,
+            "GridNum": 8,
+            "XCoordinate": 450.0,
+            "YCoordinate": 365.2174072265625
         }
     ]
 }

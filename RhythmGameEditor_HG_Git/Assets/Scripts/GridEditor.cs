@@ -16,17 +16,14 @@ public class GridEditor : MonoBehaviour
                        //(노트 사이에 거리를 잴 때 쓰는 변수인데, spb와 speed를 눈으로 봤을 때 어느정도의 거리가 좋을것 같은지 눈대중으로 계산해서 나눠주는 값
 
     public GameObject gridObject;
+    public GameObject inGameGrid;
 
     private int SecondStartNumber;
 
     public int GridAmount;
     public int TrueNumber;
     public bool isLoad;
-    public double curruntTime ;
-    void Start()
-    {
-        
-    }
+    public double curruntTime;
 
     // Update is called once per frame
     void Update()
@@ -74,6 +71,8 @@ public class GridEditor : MonoBehaviour
         //Debug.Log("spb"+music.spb);
     }
 
+    
+    
     public IEnumerator Syncing()//노래가 2.608초 지날 때마다 특정 y좌표에 그리드 설치해주면 그 좌표부터 판정선을 지나가는 순간까지는 크게 싱크가 밀리지 않는다는 것으로부터 생각한 방법
     {
         TrueNumber = 1;
@@ -110,13 +109,13 @@ public class GridEditor : MonoBehaviour
         {
             //Debug.Log(i * music.spb * 4 * music.Speed);
             GameObject obj = Instantiate(gridObject,
-                new Vector3(0f, -music.offset * 140 + i * music.spb * 32f * music.Speed * (1f / music.DivisionValue)),
+                new Vector3(0f, -music.offset * 140 + i * music.spb * 32f * music.gridIntervel * (1f / music.DivisionValue)),
                 Quaternion.identity);  //4는 노트줄 4개
             Process32rd(obj);
             Grid grid = obj.GetComponent<Grid>();
             BoxCollider2D coll = obj.GetComponent<BoxCollider2D>();
-            coll.size = new Vector2(1122f, music.spb * music.Speed * 31f * (1f/music.DivisionValue));
-            coll.offset = new Vector2(0f, music.spb * music.Speed * 31f * (1f/music.DivisionValue) * 0.5f);
+            coll.size = new Vector2(1122f, music.spb * music.gridIntervel * 31f * (1f/music.DivisionValue));
+            coll.offset = new Vector2(0f, music.spb * music.gridIntervel * 31f * (1f/music.DivisionValue) * 0.5f);
             grid.barNumber = i;
             SecondStartNumber = i;
             grids.Add(obj);
@@ -136,7 +135,7 @@ public class GridEditor : MonoBehaviour
             
             //Debug.Log(i * music.spb * 4 * music.Speed);
             GameObject obj = Instantiate(gridObject,
-                new Vector3(0f, -music.offset * 140 + i * music.spb * 32f * music.Speed * (1f / music.DivisionValue)),
+                new Vector3(0f, -music.offset * 140 + i * music.spb * 32f * music.gridIntervel * (1f / music.DivisionValue)),
                 Quaternion.identity);   //4는 노트줄 4개
             if (i == 1)
             {
@@ -145,8 +144,8 @@ public class GridEditor : MonoBehaviour
             Process32rd(obj);
             Grid grid = obj.GetComponent<Grid>();
             BoxCollider2D coll = obj.GetComponent<BoxCollider2D>();
-            coll.size = new Vector2(1122f, music.spb * music.Speed * 31f * (1f/music.DivisionValue));
-            coll.offset = new Vector2(0f, music.spb * music.Speed * 31f * (1f/music.DivisionValue) * 0.5f);
+            coll.size = new Vector2(1122f, music.spb * music.gridIntervel * 31f * (1f/music.DivisionValue));
+            coll.offset = new Vector2(0f, music.spb * music.gridIntervel * 31f * (1f/music.DivisionValue) * 0.5f);
             grid.barNumber = i;
             SecondStartNumber = i;
             grids.Add(obj);
@@ -165,8 +164,8 @@ public class GridEditor : MonoBehaviour
         Process32rd(obj);
         Grid grid = obj.GetComponent<Grid>();
         BoxCollider2D coll = obj.GetComponent<BoxCollider2D>();
-        coll.size = new Vector2(1122f, music.spb * music.Speed * 31f * (1f/music.DivisionValue));
-        coll.offset = new Vector2(0f, music.spb * music.Speed * 31f * (1f/music.DivisionValue) * 0.5f);
+        coll.size = new Vector2(1122f, music.spb * music.gridIntervel * 31f * (1f/music.DivisionValue));
+        coll.offset = new Vector2(0f, music.spb * music.gridIntervel * 31f * (1f/music.DivisionValue) * 0.5f);
         grid.barNumber = i;
         SecondStartNumber = i;
         grids.Add(obj);
@@ -177,12 +176,12 @@ public class GridEditor : MonoBehaviour
     {
         for (int i = SecondStartNumber + 1; i < (music.MusicTime + 1) / 4; i++)
         {
-            GameObject obj = Instantiate(gridObject, new Vector3(0f, music.offset + (SecondStartNumber+1) * music.spb * 32f * music.Speed * (1f/music.DivisionValue)), Quaternion.identity);
+            GameObject obj = Instantiate(gridObject, new Vector3(0f, music.offset + (SecondStartNumber+1) * music.spb * 32f * music.gridIntervel * (1f/music.DivisionValue)), Quaternion.identity);
             Process32rd(obj);
             Grid grid = obj.GetComponent<Grid>();
             BoxCollider2D coll = obj.GetComponent<BoxCollider2D>();
-            coll.size = new Vector2(1122f, music.spb * music.Speed * 31f * (1f/music.DivisionValue));
-            coll.offset = new Vector2(0f, music.spb * music.Speed * 31f * (1f/music.DivisionValue) * 0.5f);
+            coll.size = new Vector2(1122f, music.spb * music.gridIntervel * 31f * (1f/music.DivisionValue));
+            coll.offset = new Vector2(0f, music.spb * music.gridIntervel * 31f * (1f/music.DivisionValue) * 0.5f);
             grid.barNumber = i;
             grids.Add(obj);
 
@@ -195,7 +194,7 @@ public class GridEditor : MonoBehaviour
         for(int i = 0; i < 32; i++)
         {
             GameObject obj = grid.transform.GetChild(i).gameObject;
-            obj.transform.localPosition = new Vector3(0f, music.spb * i * (1f/music.DivisionValue) * music.Speed);// 한 노트가 떨어지는데 걸리는 시간이 music.spb이고, 그 간격을 얼마나 넓힐지가 Speed
+            obj.transform.localPosition = new Vector3(0f, music.spb * i * (1f/music.DivisionValue) * music.gridIntervel);// 한 노트가 떨어지는데 걸리는 시간이 music.spb이고, 그 간격을 얼마나 넓힐지가 Speed
         }
     }
     
