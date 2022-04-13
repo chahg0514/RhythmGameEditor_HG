@@ -2675,7 +2675,8 @@ MonoBehaviour:
   DivisionValue: 8
   MusicTime: 0
   createGridTime: 0
-  Speed: 0
+  Speed: 1
+  isMusicStarted: 0
   offset: 1.3
 --- !u!82 &1095784483
 AudioSource:

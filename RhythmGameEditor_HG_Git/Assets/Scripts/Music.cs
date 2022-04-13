@@ -19,7 +19,7 @@ public class Music : MonoBehaviour
     public double createGridTime;
     public float Speed;
 
-    private bool isMusicStarted = false;
+    public bool isMusicStarted = false;
     
     public float offset = 1.3f;
     
